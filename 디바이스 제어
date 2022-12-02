@@ -1,0 +1,152 @@
+int dust_sensor_in = A0;   // 미세먼지 핀 번호
+int dust_sensor_out = 100;  // 미세먼지 밖 초기값 설정 : 나쁨
+int A = 8; // 선풍기 센서
+int B = 9;
+int LED_G = 3; // 초록:1단계
+int LED_Y = 4; // 노랑:2단계
+int LED_R = 5; // 빨강:3단계
+
+//상태저장
+String dust_in;
+String dust_out = "나쁨";
+
+float dust_value_in = 0;  // 센서에서 입력 받은 미세먼지 값
+float dustDensityug_in=0;  // ug/m^3 값을 계산
+ 
+int sensor_led = 12;      // 미세먼지 센서 안에 있는 적외선 led 핀 번호
+int sampling = 280;    // 적외선 led를 키고, 센서 값을 읽어 들여 미세먼지를 측정하는 샘플링 시간
+int waiting = 40;    
+float stop_time = 9680;   // 센서를 구동하지 않는 시간
+ 
+void setup(){
+  Serial.begin(9600);   // 시리얼 모니터 시작, 속도는 9600
+  pinMode(sensor_led,OUTPUT); // 미세먼지 적외선 led를 출력으로 설정
+  pinMode(4,OUTPUT);
+  
+  pinMode(A,OUTPUT);
+  pinMode(B,OUTPUT);
+  
+  pinMode(LED_G,OUTPUT);
+  pinMode(LED_Y,OUTPUT);
+  pinMode(LED_R,OUTPUT);
+}
+ 
+void loop(){
+  digitalWrite(sensor_led, LOW);    // LED 켜기
+  delayMicroseconds(sampling);   // 샘플링해주는 시간. 
+  dust_value_in = analogRead(dust_sensor_in); // 센서 값 읽어오기
+  delayMicroseconds(waiting);  // 너무 많은 데이터 입력을 피해주기 위해 잠시 멈춰주는 시간. 
+  digitalWrite(sensor_led, HIGH); // LED 끄기
+  delayMicroseconds(stop_time);   // LED 끄고 대기  
+ 
+  dustDensityug_in = (0.17 * (dust_value_in * (5.0 / 1024)) - 0.1) * 1000;    // 미세먼지 값 계산
+  Serial.print("Dust Density [ug/m3]: ");            // 시리얼 모니터에 미세먼지 값 출력
+  Serial.print(dustDensityug_in);
+  
+  if(dustDensityug_in <= 30.0){ // 대기 중 미세먼지가 좋음 일 때
+     dust_in = "좋음";
+     Serial.print("   ");
+     Serial.println("좋음");
+  }else if(30.0 < dustDensityug_in && dustDensityug_in <= 80.0){      // 대기 중 미세먼지가 보통 일 때 녹색 출력
+     dust_in = "보통";
+     Serial.print("   ");
+     Serial.println("보통"); 
+     //int b=2   
+  }else if (80.0 < dustDensityug_in && dustDensityug_in <= 150.0){    // 대기 중 미세먼지가 나쁨 일 때 노란색 출력
+     dust_in = "나쁨";
+     Serial.print("   ");
+     Serial.println("나쁨");        
+  }else{ // 대기 중 미세먼지가 매우 나쁨 일 때   
+     Serial.print("   ");
+     Serial.println("매우나쁨");
+  }
+
+  //안 < 밖  : 뒤에서 바람나옴
+  if(dust_sensor_in < dust_sensor_out){
+    //팬모터가 A방향으로 회전 //뒤
+    if(dust_in == "좋음" &&dust_out == "나쁨"){ //2단계
+      digitalWrite(A,LOW); //팬모터가 A방향으로 회전 //뒤
+      digitalWrite(B,HIGH);
+      //digitalWrite(LED_Y,HIGH);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,LOW);
+      Serial.println("좋음-나쁨 2단계 : Y");
+    }else if(dust_in == "좋음" &&dust_out == "매우나쁨"){// 3단계
+      digitalWrite(A,LOW); //뒤
+      digitalWrite(B,HIGH);
+      //digitalWrite(LED_Y,LOW);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,HIGH);
+      Serial.println("좋음-매우나쁨 3단계 : R");
+    }else if(dust_in == "보통" &&dust_out == "나쁨"){//1단계
+      digitalWrite(A,LOW); //뒤
+      digitalWrite(B,HIGH);
+      //digitalWrite(LED_Y,LOW);
+      //digitalWrite(LED_G,HIGH);
+      //digitalWrite(LED_R,LOW);
+      Serial.println("보통-나쁨 1단계 : G");
+    }else if(dust_in == "보통" &&dust_out == "매우나쁨"){//2단계
+      digitalWrite(A,LOW); //뒤
+      digitalWrite(B,HIGH);
+      //digitalWrite(LED_Y,HIGH);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,LOW);
+      Serial.println("보통-매우나쁨 2단계 : Y");
+    }else{// 정지
+      digitalWrite(A,HIGH); // 전체 정지
+      digitalWrite(B,HIGH);
+      //digitalWrite(LED_Y,LOW);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,LOW);
+    }
+  }
+  //안 > 밖  : 앞에서 바람나옴
+  else if(dust_sensor_out < dust_sensor_in){
+    //팬모터가 B방향으로 회전 //앞
+    if(dust_out == "좋음" &&dust_out == "나쁨"){ //2단계
+      digitalWrite(A,HIGH);
+      digitalWrite(B,LOW);
+      //digitalWrite(LED_Y,HIGH);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,LOW);
+      Serial.println("좋음-나쁨 2단계 : Y");
+    }else if(dust_out == "좋음" &&dust_in == "매우나쁨"){// 3단계
+      digitalWrite(A,HIGH);
+      digitalWrite(B,LOW);
+      //digitalWrite(LED_R,HIGH);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_Y,LOW);
+      Serial.println("좋음-매우나쁨 3단계 : R");
+    }else if(dust_out == "보통" &&dust_in == "나쁨"){//1단계
+      digitalWrite(A,HIGH);
+      digitalWrite(B,LOW);
+      //digitalWrite(LED_G,HIGH);
+      Serial.println("보통-나쁨 1단계 : G");
+    }else if(dust_out == "보통" &&dust_in == "매우나쁨"){//2단계
+      digitalWrite(A,HIGH);
+      digitalWrite(B,LOW);
+      //digitalWrite(LED_Y,HIGH);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,LOW);
+      Serial.println("보통-매우나쁨 2단계 : Y");
+    }else{// 정지
+      digitalWrite(A,HIGH); // 전체 정지
+      digitalWrite(B,HIGH);
+      //digitalWrite(LED_Y,LOW);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,LOW);
+    }
+  }
+  //안 == 밖 : 모터정지, led정지
+  else{ 
+      digitalWrite(A,HIGH); // 전체 정지
+      digitalWrite(B,HIGH);
+      //digitalWrite(LED_Y,LOW);
+      //digitalWrite(LED_G,LOW);
+      //digitalWrite(LED_R,LOW);
+      
+  }
+  
+  delay(5000);
+ 
+}
