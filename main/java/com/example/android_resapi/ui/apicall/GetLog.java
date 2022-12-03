@@ -111,7 +111,7 @@ public class GetLog extends GetRequest {
         }
 
         public String toString() {
-            return String.format("[%s] Temperature1: %s,emperature1: %s, LED: %s", timestamp, temperature1,temperature2, LED);
+            return String.format("[%s] Temperature1: %s,emperature1: %s, LED: %s", timestamp, temperature1,temperature2, LED);// 타임, 내부농도, 외부농도, 팬 세기
         }
     }
 }

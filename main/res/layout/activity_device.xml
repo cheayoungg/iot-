@@ -43,12 +43,6 @@
                 android:textColor="#FFEB3B"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="최신 상태 (변경후)"
-                android:textColor="#FFEB3B"
-                android:textStyle="bold" />
         </TableRow>
 
         <TableRow>
@@ -68,7 +62,70 @@
                     android:id="@+id/reported_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/reported_temp_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="         (상태:좋음/보통/나쁨/매우나쁨)"/>
             </LinearLayout>
+        </TableRow>
+        <TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="온도2(c):"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/reported_temp2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/reported_temp_state2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="       (상태:좋음/보통/나쁨/매우나쁨)"/>
+            </LinearLayout>
+        </TableRow>
+        <TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LED 상태(세기단계): "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/reported_led"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="최신 상태 (값 변경후 자동으로 설정되는 값을 보여줌)"
+                android:textColor="#FFEB3B"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -85,9 +142,14 @@
                     android:id="@+id/desired_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/desired_temp_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="         (상태:좋음/보통/나쁨/매우나쁨)"/>
             </LinearLayout>
         </TableRow>
-
         <TableRow>
 
             <LinearLayout
@@ -98,15 +160,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/led"
+                    android:text="온도2(c):"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/reported_led"
+                    android:id="@+id/desired_temp2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </LinearLayout>
 
+                <TextView
+                    android:id="@+id/desired_temp_state2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="       (상태:좋음/보통/나쁨/매우나쁨)"/>
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,7 +185,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/led"
+                    android:text="LED 상태(세기단계)"
                     android:textStyle="bold" />
 
                 <TextView
@@ -124,18 +194,37 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </TableRow>
+        <TableRow>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="모터 상태(뒤/앞/멈춤): "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/desired_fan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </TableRow>
+
     </TableLayout>
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="19dp"
-        android:background="?android:attr/listDivider" />
+        android:background="@color/colorPrimary" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="변경"
+        android:text="변경(자동)"
         android:id = "@+id/updateBtn"
         />
     <LinearLayout
@@ -160,13 +249,101 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/led"
+            android:text="온도2(c): "
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_temp2"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LED 상태(삭제되는 부분): "
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edit_led"
             android:layout_width="70dp"
             android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="19dp"
+        android:background="@color/colorPrimary" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="변경(수동) - 팬세기"
+        android:id = "@+id/updateBtn_fanspeed"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id = "@+id/fanspeed_0"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:id = "@+id/fanspeed_1"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:id = "@+id/fanspeed_2"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:id = "@+id/fanspeed_3"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="변경(수동) - 팬방향 : Back,Front,Stop"
+        android:id = "@+id/updateBtn_fandirect"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop"
+            android:id = "@+id/fandirect_stop"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id = "@+id/fandirect_back"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Front"
+            android:id = "@+id/fandirect_front"
+            />
     </LinearLayout>
 
 </LinearLayout>
