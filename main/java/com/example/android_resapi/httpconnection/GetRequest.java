@@ -30,7 +30,7 @@ abstract public class GetRequest extends AsyncTask<String, Void, String> {
                 Log.e(TAG, "Error: URL is null ");
                 return null;
             }
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //url정보로 서버랑 연결
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             if (conn == null) {
                 Log.e(TAG, "HttpsURLConnection Error");
@@ -41,21 +41,21 @@ abstract public class GetRequest extends AsyncTask<String, Void, String> {
             conn.setDoInput(true);
             conn.setDoOutput(false);
 
-            int resCode = conn.getResponseCode(); //서버로부터 응답 받음
+            int resCode = conn.getResponseCode();
 
             if (resCode != HttpsURLConnection.HTTP_OK) {
                 Log.e(TAG, "HttpsURLConnection ResponseCode: " + resCode);
                 conn.disconnect();
                 return null;
             }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream())); //서버로부터 응답받은 내용들 inputstream 통해서 받아옴
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = null;
             while (true) {
-                line = reader.readLine(); // 받아온 reader 버퍼 스트림 한줄씩 읽어서
+                line = reader.readLine();
                 if (line == null) {
                     break;
                 }
-                output.append(line); // output 스트링 버퍼에 누적해서 더함
+                output.append(line);
             }
 
             reader.close();
@@ -66,7 +66,7 @@ abstract public class GetRequest extends AsyncTask<String, Void, String> {
             ex.printStackTrace();
         }
 
-        return output.toString(); //doInBackground 결과로 리턴
+        return output.toString();
     }
 
 }
