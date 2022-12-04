@@ -82,8 +82,7 @@ public class GetLog extends GetRequest {
 
                 JSONObject jsonObject = (JSONObject)jsonArray.get(i);
 
-                Tag thing = new Tag(jsonObject.getString("temperature1"),
-                                    jsonObject.getString("temperature2"),
+                Tag thing = new Tag(jsonObject.getString("temperature"),
                                     jsonObject.getString("LED"),
                                     jsonObject.getString("timestamp"));
 
@@ -98,20 +97,18 @@ public class GetLog extends GetRequest {
     }
 
     class Tag {
-        String temperature1;
-        String temperature2;
+        String temperature;
         String LED;
         String timestamp;
 
-        public Tag(String temp1,String temp2, String led, String time) {
-            temperature1 = temp1;
-            temperature2 = temp2;
+        public Tag(String temp, String led, String time) {
+            temperature = temp;
             LED = led;
             timestamp = time;
         }
 
         public String toString() {
-            return String.format("[%s] Temperature1: %s,emperature1: %s, LED: %s", timestamp, temperature1,temperature2, LED);// 타임, 내부농도, 외부농도, 팬 세기
+            return String.format("[%s] Temperature: %s, LED: %s", timestamp, temperature, LED);
         }
     }
 }

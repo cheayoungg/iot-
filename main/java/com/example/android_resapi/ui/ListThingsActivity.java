@@ -19,7 +19,7 @@ public class ListThingsActivity extends AppCompatActivity {
         String url = intent.getStringExtra("listThingsURL");
 
 
-        new GetThings(ListThingsActivity.this, url).execute(); // GetThings 객체 생성시켜서 execute()메소드 호출
+        new GetThings(ListThingsActivity.this, url).execute();
 
 
     }
