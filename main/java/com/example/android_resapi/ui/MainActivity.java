@@ -26,9 +26,17 @@ public class MainActivity extends AppCompatActivity {
         //thingShadowURL = findViewById(R.id.thingShadowURL);
         //getLogsURL = findViewById(R.id.getLogsURL);
 
-        listThingsURL ="https://9r3v6uhoqd.execute-api.ap-northeast-2.amazonaws.com/prod/devices";
-        thingShadowURL ="https://9r3v6uhoqd.execute-api.ap-northeast-2.amazonaws.com/prod/devices/MyMKRWiFi1010";
-        getLogsURL ="https://9r3v6uhoqd.execute-api.ap-northeast-2.amazonaws.com/prod/devices/MyMKRWiFi1010/log";
+        ///////////MKR1010 URI//////////////////
+        //listThingsURL ="https://9r3v6uhoqd.execute-api.ap-northeast-2.amazonaws.com/prod/devices";
+        //thingShadowURL ="https://9r3v6uhoqd.execute-api.ap-northeast-2.amazonaws.com/prod/devices/MyMKRWiFi1010";
+        //getLogsURL ="https://9r3v6uhoqd.execute-api.ap-northeast-2.amazonaws.com/prod/devices/MyMKRWiFi1010/log";
+
+        ////////////////MKR1010_2 URI//////////////////////
+        listThingsURL ="https://db4xmou1l3.execute-api.ap-northeast-2.amazonaws.com/hwag/devices";
+        thingShadowURL ="https://db4xmou1l3.execute-api.ap-northeast-2.amazonaws.com/hwag/devices/MyMKRWiFi1010_2";
+        //getLogsURL ="https://db4xmou1l3.execute-api.ap-northeast-2.amazonaws.com/hwag/devices/hwangData/log";
+        getLogsURL ="https://db4xmou1l3.execute-api.ap-northeast-2.amazonaws.com/hwag/devices/projectData/log";
+        //getLogsURL ="https://db4xmou1l3.execute-api.ap-northeast-2.amazonaws.com/hwag/devices/MyMKRWiFi1010_2/log";
 
         //사물 조회 버튼 누르면 ListThingsActivity로 이동
         Button listThingsBtn = findViewById(R.id.listThingsBtn);

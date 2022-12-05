@@ -88,7 +88,7 @@ public class LogActivity extends AppCompatActivity {
                     }
                 };
 
-                DatePickerDialog dialog = new DatePickerDialog(LogActivity.this, callbackMethod, 2020, 12, 0);
+                DatePickerDialog dialog = new DatePickerDialog(LogActivity.this, callbackMethod, 2022, 1, 0);
 
                 dialog.show();
 

@@ -32,7 +32,7 @@ public class UpdateShadow extends PutRequest {
         }
     }
     @Override
-   protected void onPostExecute(String result) {
+    protected void onPostExecute(String result) {
         Toast.makeText(activity,result, Toast.LENGTH_SHORT).show();
     }
 
@@ -51,7 +51,6 @@ public class UpdateShadow extends PutRequest {
             if (tempValue != null) output.put("temperature", tempValue);
             String ledValue = desired.getString("LED");
             if (ledValue != null) output.put("LED",ledValue);
-
         } catch (JSONException e) {
             Log.e(TAG, "Exception in processing JSONString.", e);
             e.printStackTrace();

@@ -82,11 +82,19 @@ public class GetLog extends GetRequest {
 
                 JSONObject jsonObject = (JSONObject)jsonArray.get(i);
 
-                Tag thing = new Tag(jsonObject.getString("temperature1"),
-                                    jsonObject.getString("temperature2"),
-                                    jsonObject.getString("LED"),
+                Tag thing = new Tag(jsonObject.getString("dustsin"),
+                                    jsonObject.getString("dustsout"),
+                                    jsonObject.getString("fanled"),
+                                    jsonObject.getString("fan"),
                                     jsonObject.getString("timestamp"));
 
+               // Tag thing = new Tag(jsonObject.getString("dust_s_in"),
+                //                   jsonObject.getString("dust_s_out"),
+                //                   jsonObject.getString("dust_in_f"),
+                //                   jsonObject.getString("dust_out-f"),
+                //                   jsonObject.getString("fan"),
+                //                   jsonObject.getString("fan_led"),
+                //                   jsonObject.getString("timestamp"));
                 output.add(thing);
             }
 
@@ -98,20 +106,43 @@ public class GetLog extends GetRequest {
     }
 
     class Tag {
-        String temperature1;
-        String temperature2;
-        String LED;
+        //String temperature1;
+        //String temperature2;
+        //String LED;
+        String dustsin;
+        String dustsout;
+        String fanled;
+        String fan;
         String timestamp;
+        //String dust_s_in;
+        //String dust_s_out;
+       // String dust_in_f;
+       // String dust_out_f;
+        //String fan;
+        //String fan_led;
 
-        public Tag(String temp1,String temp2, String led, String time) {
-            temperature1 = temp1;
-            temperature2 = temp2;
-            LED = led;
-            timestamp = time;
+        public Tag(String ndust_s_in,String ndust_s_out,String nfan_led,String nfan,String ntimestamp) { //String ndust_s_in,String ndust_s_out, String ndust_in_f, String ndust_out_f,String nfan,String nfan_led,String ntimestamp
+           //String temp1,String temp2, String led, String timeString nfan
+            //temperature1 = temp1;
+            //temperature2 = temp2;
+           // LED = led;
+            // timestamp = time;
+
+            dustsin=ndust_s_in;
+            dustsout=ndust_s_out;
+            fanled=nfan_led;
+            fan=nfan;
+            timestamp=ntimestamp;
+            //dustfin=ndust_in_f;
+            //dustfoutf=ndust_out_f;
+
+
         }
 
         public String toString() {
-            return String.format("[%s] Temperature1: %s,emperature1: %s, LED: %s", timestamp, temperature1,temperature2, LED);// 타임, 내부농도, 외부농도, 팬 세기
+            //return String.format("[%s] Temperature1: %s,emperature1: %s, LED: %s", timestamp, temperature1,temperature2, LED);// 타임, 내부농도, 외부농도, 팬 세기
+            return String.format("[%s] Dustsin: %s,Dustsout: %s, Fan: %s, Fanled: %s"
+                    , timestamp, dustsin,dustsout,fan,fanled);
         }
     }
 }

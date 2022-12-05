@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -55,16 +55,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/temp"
+                    android:text="내부농도: "
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/reported_temp"
+                    android:id="@+id/reported_dustin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/reported_temp_state"
+                    android:id="@+id/reported_dustin_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="         (상태:좋음/보통/나쁨/매우나쁨)"/>
@@ -80,16 +80,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="온도2(c):"
+                    android:text="외부농도:"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/reported_temp2"
+                    android:id="@+id/reported_dustout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/reported_temp_state2"
+                    android:id="@+id/reported_dustout_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="       (상태:좋음/보통/나쁨/매우나쁨)"/>
@@ -109,7 +109,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/reported_led"
+                    android:id="@+id/reported_fanled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -185,7 +185,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LED 상태(세기단계)"
+                    android:text="LED 상태(세기단계): "
                     android:textStyle="bold" />
 
                 <TextView
@@ -234,11 +234,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/temp"
+            android:text="내부농도: "
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edit_temp"
+            android:id="@+id/edit_dustin"
             android:layout_width="70dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -249,26 +249,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="온도2(c): "
+            android:text="외부농도: "
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edit_temp2"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LED 상태(삭제되는 부분): "
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/edit_led"
+            android:id="@+id/edit_dustout"
             android:layout_width="70dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
